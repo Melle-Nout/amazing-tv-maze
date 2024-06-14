@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Image from './Image.vue'
+import Title from './Title.vue'
 
 interface Props {
   image?: string
@@ -14,7 +15,7 @@ defineProps<Props>()
   <div class="profile">
     <Image v-if="image" :src="image" class="profile-image" />
     <div class="profile-content">
-      <h3 v-if="title" class="profile-title">{{ title }}</h3>
+      <Title title-heading="h3" :title />
       <p v-if="description">{{ description }}</p>
     </div>
   </div>
