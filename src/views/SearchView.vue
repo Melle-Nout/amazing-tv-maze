@@ -16,7 +16,6 @@ interface SearchResponse {
 }
 
 const route = useRoute()
-
 const query = computed(() => {
   return { q: route.query.q }
 })
@@ -25,6 +24,7 @@ const { data: shows, pending, submit } = useFetch<SearchResponse[]>('search/show
 const { sortShowsByRating } = useShowSorter()
 
 watch(() => route.query.q, submit, { immediate: true })
+
 const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => show.show) ?? []))
 const titleText = computed(() =>
   shows.value?.length ? 'Search results' : `No results where found for: ${query.value.q}`
