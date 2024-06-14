@@ -23,6 +23,7 @@ function getShowSliderData(shows: Show[]) {
 }
 
 const orderedShows = ref<Record<string, Show[]>>()
+
 onBeforeMount(async () => {
   await submit()
 
