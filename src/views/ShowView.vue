@@ -10,7 +10,7 @@ import type { Show } from '@/types/Show'
 import { useFetch } from '@/composables/useFetch'
 import Page from '@/components/Page.vue'
 import Hero from '@/components/Hero.vue'
-import Paragraph from '@/components/Paragraph.vue'
+import Article from '@/components/Article.vue'
 import Title from '@/components/Title.vue'
 import Section from '@/components/Section.vue'
 import Profile from '@/components/Profile.vue'
@@ -70,7 +70,7 @@ const heroMetaItems = computed(() => {
       }"
     />
     <Section v-if="show.summary">
-      <Paragraph title="Summary" :text="show.summary" />
+      <Article title="Summary" :text="show.summary" />
     </Section>
     <Section v-if="mappedImages?.length">
       <Slider :items="mappedImages" />
@@ -93,13 +93,13 @@ const heroMetaItems = computed(() => {
       "
     >
       <Title title="Seasons" />
-      <Paragraph
+      <Article
         v-for="season in show._embedded.seasons"
         :key="`season-${season.id}`"
         :title="`Season ${season.number}`"
         :text="season.summary"
         title-heading="h3"
-        class="season-paragraph"
+        class="season-article"
       />
     </Section>
   </Page>
@@ -116,11 +116,11 @@ const heroMetaItems = computed(() => {
   margin-top: 10px;
 }
 
-.season-paragraph {
+.season-article {
   margin-bottom: 20px;
 }
 
-.season-paragraph:first-of-type {
+.season-article:first-of-type {
   margin-top: 10px;
 }
 

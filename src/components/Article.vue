@@ -13,14 +13,14 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <article v-if="text" class="paragraph">
-    <Title :titleHeading :title class="paragraph-title" />
+  <article v-if="text" class="article">
+    <Title :titleHeading :title class="article-title" />
     <p v-html="text" />
   </article>
 </template>
 
 <style scoped>
-.paragraph-title {
+.article-title {
   margin-bottom: 10px;
 }
 </style>
