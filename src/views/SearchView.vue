@@ -8,6 +8,7 @@ import { useFetch } from '@/composables/useFetch'
 import { useShowSorter } from '@/composables/useShowSorter'
 import Loader from '@/components/Loader.vue'
 import Page from '@/components/Page.vue'
+import Section from '@/components/Section.vue'
 import Title from '@/components/Title.vue'
 
 interface SearchResponse {
@@ -33,14 +34,16 @@ const titleText = computed(() =>
 
 <template>
   <Page :is-content-page="true">
-    <Title title-heading="h1" :title="titleText" />
-    <Transition name="fade" mode="out-in">
-      <Loader v-if="pending" />
-      <div v-else-if="shows?.length" class="search-grid">
-        <template v-for="show in sortedShows" :key="`card-${show.id}`">
-          <pre>{{ show }}</pre>
-        </template>
-      </div>
-    </Transition>
+    <Section>
+      <Title title-heading="h1" :title="titleText" />
+      <Transition name="fade" mode="out-in">
+        <Loader v-if="pending" />
+        <div v-else-if="shows?.length" class="search-grid">
+          <template v-for="show in sortedShows" :key="`card-${show.id}`">
+            <pre>{{ show }}</pre>
+          </template>
+        </div>
+      </Transition>
+    </Section>
   </Page>
 </template>
