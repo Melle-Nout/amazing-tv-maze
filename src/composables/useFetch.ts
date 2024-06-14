@@ -2,11 +2,13 @@ import { ofetch, type FetchOptions } from 'ofetch'
 import { reactive, ref, shallowRef } from 'vue'
 
 export function useFetch<T>(url: string, options?: FetchOptions<'json'>) {
-  const data = shallowRef<T>()
+  const data = shallowRef<T | null>(null)
   const error = ref()
   const pending = ref(false)
 
   async function submit() {
+    data.value = null
+    error.value = null
     const fetchOptions = reactive({ ...options })
 
     try {
