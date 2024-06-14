@@ -77,7 +77,7 @@ const heroMetaItems = computed(() => {
     </Section>
     <Section v-if="show._embedded?.cast?.length">
       <Title title="Cast" />
-      <div class="grid">
+      <div class="profile-grid">
         <Profile
           v-for="member in show._embedded.cast"
           :key="`cast-member-${member.person?.id}`"
@@ -110,7 +110,7 @@ const heroMetaItems = computed(() => {
   padding-bottom: 40px;
 }
 
-.grid {
+.profile-grid {
   display: grid;
   gap: 20px;
   margin-top: 10px;
@@ -125,7 +125,7 @@ const heroMetaItems = computed(() => {
 }
 
 @media (min-width: 768px) {
-  .grid {
+  .profile-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
