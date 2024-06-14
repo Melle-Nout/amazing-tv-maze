@@ -14,6 +14,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "embla-carousel-vue": "^8.1.5",
+    "ofetch": "^1.3.4",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
