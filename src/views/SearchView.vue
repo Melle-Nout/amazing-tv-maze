@@ -28,15 +28,12 @@ const { sortShowsByRating } = useShowSorter()
 watch(() => route.query.q, submit, { immediate: true })
 
 const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => show.show) ?? []))
-const titleText = computed(() =>
-  shows.value?.length ? 'Search results' : `No results where found for: ${query.value.q}`
-)
 </script>
 
 <template>
   <Page :is-content-page="true">
-    <Section>
-      <Title title-heading="h1" :title="titleText" />
+    <Section :show-border="false">
+      <Title title-heading="h1" title="Search results" />
       <Transition name="fade" mode="out-in">
         <Loader v-if="pending" />
         <div v-else-if="shows?.length" class="search-grid">
@@ -49,6 +46,7 @@ const titleText = computed(() =>
             />
           </template>
         </div>
+        <p v-else>{{ `No results found for ${query.q}` }}</p>
       </Transition>
     </Section>
   </Page>
