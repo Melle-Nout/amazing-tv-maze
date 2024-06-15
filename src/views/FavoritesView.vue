@@ -24,4 +24,10 @@ const { favorites } = useFavorites()
 .title {
   margin-top: 20px;
 }
+
+@media (min-width: 1024px) {
+  .title {
+    margin-top: 70px;
+  }
+}
 </style>
