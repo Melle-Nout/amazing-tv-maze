@@ -17,14 +17,14 @@ describe('useFetch composable', () => {
   })
 
   it('should set the data ref when a response is successful', async () => {
-    const { data, submit } = useFetch('/shows')
+    const { data, submit } = useFetch('shows')
 
     await submit()
     expect(data.value).toStrictEqual(shows)
   })
 
   it('should set the error ref when a response is unsuccessful', async () => {
-    const { error, submit } = useFetch('/error')
+    const { error, submit } = useFetch('error')
 
     const mockError = new FetchError(
       '[GET] "http://localhost:3000/error": <no response> request to http://localhost:3000/error failed, reason: Network error'

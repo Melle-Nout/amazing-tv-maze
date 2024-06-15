@@ -5,7 +5,7 @@ import { server } from './mocks/server'
 
 // fetch polyfill
 global.fetch = fetch
-global.process.env.VITE_API_BASE_URL = 'http://localhost:3000'
+global.process.env.VITE_API_BASE_URL = 'http://localhost:3000/'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 

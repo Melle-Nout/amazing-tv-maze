@@ -1,6 +1,6 @@
+import { RouterLink, type Router } from 'vue-router'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { RouterLink, type Router } from 'vue-router'
 
 import { createMockRouter } from '@/test/mocks/router'
 import Navigation from '../Navigation.vue'
