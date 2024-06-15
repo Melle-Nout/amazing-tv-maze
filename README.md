@@ -87,7 +87,7 @@ The main functionality to show horizontal lists of shows grouped by Genre and Ra
 
 The search bar in the navigation header can be used to search shows by title.
 
-A detailed overview of a show is visible by clicking a card. The detail page has been enriched by with extra data by embedding it in the query to the api `'embed[]': ['seasons', 'cast', 'images'`
+A detailed overview of a show is visible by clicking a card. The detail page has been enriched with extra data by embedding it in the query to the api `'embed[]': ['seasons', 'cast', 'images'`
 
 # Extra feature
 
