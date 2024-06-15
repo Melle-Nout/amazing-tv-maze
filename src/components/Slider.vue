@@ -104,7 +104,6 @@ onMounted(() => {
   background-color: var(--color-background-mute);
   border-width: 0;
   border-radius: 50%;
-  fill: 0.4s;
   transition:
     color 0.4s,
     opacity 0.4s,
