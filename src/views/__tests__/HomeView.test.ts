@@ -1,4 +1,4 @@
-import type { Router } from 'vue-router'
+import { RouterLink, type Router } from 'vue-router'
 import { describe, it, expect, beforeEach, vi, beforeAll } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 
@@ -75,7 +75,7 @@ describe('HomeView', () => {
     expect(actionCards.length).toBe(3)
   })
 
-  it('should redirect after clicking a card', async () => {
+  it('should redirect after clicking the body of the card', async () => {
     const wrapper = mount(HomeView, {
       global: {
         plugins: [router]
@@ -87,7 +87,7 @@ describe('HomeView', () => {
     const push = vi.spyOn(router, 'push')
     const card = wrapper.findComponent(Slider).findComponent(Card)
 
-    await card.trigger('click')
+    await card.findComponent(RouterLink).trigger('click')
 
     expect(push).toHaveBeenCalledOnce()
     expect(push).toHaveBeenCalledWith('/show/2')

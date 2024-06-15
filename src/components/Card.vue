@@ -3,29 +3,39 @@ import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import type { Card } from '@/types/shared-props/Card'
+import { useFavorites } from '@/composables/useFavorites'
 import Image from './Image.vue'
+import FavoriteIcon from './FavoriteIcon.vue'
 
 const props = defineProps<Card>()
 
 const componentToRender = computed(() => (props.id ? RouterLink : 'div'))
 const componentProps = computed(() => props.id && { to: `/show/${props.id}` })
+
+const { toggle, isPresent } = useFavorites()
 </script>
 
 <template>
-  <component
-    v-if="images && Object.keys(images).length"
-    :is="componentToRender"
-    v-bind="componentProps"
-    class="card"
-  >
-    <Image
-      :src="images.medium || images.original"
-      :sources="[{ srcset: images.original, media: '(min-width: 600px)' }]"
-      alt="Show poster"
-      class="card-media"
-    />
-    <span v-if="rating" class="card-rating">{{ rating }} ⭐</span>
-  </component>
+  <div v-if="images && Object.keys(images).length" class="card">
+    <component :is="componentToRender" v-bind="componentProps">
+      <Image
+        :src="images.medium || images.original"
+        :sources="[{ srcset: images.original, media: '(min-width: 600px)' }]"
+        alt="Show poster"
+        class="card-media"
+      />
+      <span v-if="rating" class="card-rating">{{ rating }} ⭐</span>
+    </component>
+    <button
+      v-if="id && (images.original || images.medium)"
+      @click="toggle({ id, images, rating })"
+      type="button"
+      aria-label="Favorite"
+      class="card-favorite"
+    >
+      <FavoriteIcon :is-full="isPresent(id)" />
+    </button>
+  </div>
 </template>
 
 <style scoped>
@@ -48,15 +58,29 @@ const componentProps = computed(() => props.id && { to: `/show/${props.id}` })
   transition: scale 0.4s;
 }
 
-.card-rating {
+.card-rating,
+.card-favorite {
   position: absolute;
-  bottom: 0;
   padding: 5px 10px;
   font-size: 1rem;
+  background-color: var(--color-primary);
+}
+
+.card-rating {
+  bottom: 0;
   font-weight: bold;
   border-top-right-radius: var(--border-radius);
   color: white;
-  background-color: var(--color-primary);
+}
+
+.card-favorite {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  border-width: 0;
+  border-bottom-left-radius: var(--border-radius);
 }
 
 @media (hover: hover) and (min-width: 1024px) {

@@ -27,7 +27,15 @@ const { sortShowsByRating } = useShowSorter()
 
 watch(() => route.query.q, submit, { immediate: true })
 
-const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => show.show) ?? []))
+const sortedShows = computed(() => {
+  const showsByRating = sortShowsByRating(shows.value?.map((show) => show.show) ?? [])
+  const formattedShows = showsByRating.map(({ id, image, rating }) => ({
+    id,
+    images: image,
+    rating: rating.average
+  }))
+  return formattedShows
+})
 </script>
 
 <template>
@@ -36,7 +44,7 @@ const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => 
       <Title title-heading="h1" title="Search results" />
       <Transition name="fade" mode="out-in">
         <Loader v-if="pending" />
-        <CardGrid v-else-if="sortedShows" :shows="sortedShows" />
+        <CardGrid v-else-if="sortedShows.length" :cards="sortedShows" />
         <p v-else>{{ `No results found for ${query.q}` }}</p>
       </Transition>
     </Section>
@@ -44,10 +52,6 @@ const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => 
 </template>
 
 <style scoped>
-.page-content {
-  min-height: calc(100dvh - 70px);
-}
-
 .loader {
   margin-top: 60px;
 }
@@ -61,10 +65,6 @@ const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => 
 }
 
 @media (min-width: 1024px) {
-  .page-content {
-    min-height: calc(100dvh - 100px);
-  }
-
   .title {
     margin-top: 70px;
   }

@@ -19,6 +19,11 @@ const router = createRouter({
       path: '/show/:id',
       name: 'show',
       component: () => import('../views/ShowView.vue')
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: () => import('../views/FavoritesView.vue')
     }
   ]
 })

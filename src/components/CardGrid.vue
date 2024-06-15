@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Show } from '@/types/Show'
+import type { Card as CardType } from '@/types/shared-props/Card'
 import Card from './Card.vue'
 
 interface Props {
-  shows: Show[]
+  cards: CardType[]
 }
 
 defineProps<Props>()
@@ -11,13 +11,8 @@ defineProps<Props>()
 
 <template>
   <div class="card-grid">
-    <template v-for="show in shows" :key="`card-${show.id}`">
-      <Card
-        v-if="show.image?.medium || show.image?.original"
-        :id="show.id"
-        :images="{ medium: show.image?.medium, original: show.image?.original }"
-        :rating="show.rating.average"
-      />
+    <template v-for="(card, index) in cards" :key="`card-${index}`">
+      <Card :id="card.id" :images="card.images" :rating="card.rating" />
     </template>
   </div>
 </template>
