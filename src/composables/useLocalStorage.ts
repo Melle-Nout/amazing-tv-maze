@@ -2,12 +2,12 @@ import { customRef } from 'vue'
 
 export function useLocalStorage<T>(key: string, defaultValue: T) {
   return customRef<T>((track, trigger) => ({
-    get: () => {
+    get() {
       track()
       const value = localStorage.getItem(key)
       return value ? (JSON.parse(value) as T) : defaultValue
     },
-    set: (value) => {
+    set(value) {
       if (!value) {
         localStorage.removeItem(key)
       } else {
