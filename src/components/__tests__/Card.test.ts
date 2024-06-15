@@ -3,6 +3,7 @@ import { RouterLink, type Router } from 'vue-router'
 import { mount } from '@vue/test-utils'
 
 import { createMockRouter } from '@/test/mocks/router'
+import { mockIntersectionObserver } from '@/test/mocks/window-mocks'
 import Card from '../Card.vue'
 
 const props = {
@@ -14,17 +15,10 @@ const props = {
 
 describe('Card', () => {
   let router: Router
-  const mockIntersectionObserver = vi.fn()
 
   beforeEach(async () => {
     router = createMockRouter()
-
-    mockIntersectionObserver.mockReturnValue({
-      observe: () => null,
-      unobserve: () => null,
-      disconnect: () => null
-    })
-    window.IntersectionObserver = mockIntersectionObserver
+    window.IntersectionObserver = mockIntersectionObserver()
   })
 
   it('should render an Image component when the props are present', () => {
