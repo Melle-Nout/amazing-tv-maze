@@ -6,7 +6,7 @@ import type { Show } from '@/types/Show'
 
 import { useFetch } from '@/composables/useFetch'
 import { useShowSorter } from '@/composables/useShowSorter'
-import Card from '@/components/Card.vue'
+import CardGrid from '@/components/CardGrid.vue'
 import Loader from '@/components/Loader.vue'
 import Page from '@/components/Page.vue'
 import Section from '@/components/Section.vue'
@@ -36,16 +36,7 @@ const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => 
       <Title title-heading="h1" title="Search results" />
       <Transition name="fade" mode="out-in">
         <Loader v-if="pending" />
-        <div v-else-if="shows?.length" class="search-grid">
-          <template v-for="show in sortedShows" :key="`card-${show.id}`">
-            <Card
-              v-if="show.image?.medium || show.image?.original"
-              :id="show.id"
-              :images="{ medium: show.image?.medium, original: show.image?.original }"
-              :rating="show.rating.average"
-            />
-          </template>
-        </div>
+        <CardGrid v-else-if="sortedShows" :shows="sortedShows" />
         <p v-else>{{ `No results found for ${query.q}` }}</p>
       </Transition>
     </Section>
@@ -63,19 +54,6 @@ const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => 
 
 .title {
   margin-top: 20px;
-}
-
-.search-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.card {
-  height: 300px;
-  aspect-ratio: 2 / 3;
 }
 
 .fade-leave-to {
