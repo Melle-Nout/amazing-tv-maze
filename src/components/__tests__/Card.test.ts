@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi, beforeAll } from 'vitest'
 import { RouterLink, type Router } from 'vue-router'
 import { mount } from '@vue/test-utils'
 
@@ -16,9 +16,10 @@ const props = {
 describe('Card', () => {
   let router: Router
 
+  beforeAll(() => (window.IntersectionObserver = mockIntersectionObserver()))
+
   beforeEach(async () => {
     router = createMockRouter()
-    window.IntersectionObserver = mockIntersectionObserver()
   })
 
   it('should render an Image component when the props are present', () => {
@@ -27,6 +28,7 @@ describe('Card', () => {
     })
 
     const image = wrapper.getComponent(Image)
+
     expect(image).toBeTruthy()
   })
 
@@ -36,6 +38,7 @@ describe('Card', () => {
     })
 
     const outerDiv = wrapper.find('div')
+
     expect(outerDiv).toBeTruthy()
     expect(outerDiv.classes()).toContain('card')
   })
@@ -48,9 +51,10 @@ describe('Card', () => {
       props: { ...props, id: 1 }
     })
 
-    const outerLink = wrapper.findComponent(RouterLink)
-    expect(outerLink).toBeTruthy()
-    expect(outerLink.classes()).toContain('card')
+    const routerLink = wrapper.findComponent(RouterLink)
+
+    expect(routerLink).toBeTruthy()
+    expect(routerLink.classes()).toContain('card')
   })
 
   it('should redirect when an `id` is present and the card is clicked', async () => {
@@ -63,8 +67,11 @@ describe('Card', () => {
 
     const push = vi.spyOn(router, 'push')
     const outerLink = wrapper.findComponent(RouterLink)
+
     expect(outerLink).toBeTruthy()
+
     await outerLink.trigger('click')
+
     expect(push).toHaveBeenCalledOnce()
     expect(push).toHaveBeenCalledWith('/show/1')
   })
@@ -75,6 +82,7 @@ describe('Card', () => {
     })
 
     const span = wrapper.find('span')
+
     expect(span).toBeTruthy()
     expect(span.text()).toBe('9 ⭐')
   })

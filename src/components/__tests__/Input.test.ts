@@ -36,6 +36,7 @@ describe('Input', () => {
     })
 
     await wrapper.find('input').setValue('foobar')
+
     expect(wrapper.props('modelValue')).toBe('foobar')
   })
 })

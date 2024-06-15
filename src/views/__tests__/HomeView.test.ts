@@ -74,4 +74,22 @@ describe('HomeView', () => {
     const actionCards = actionSlider.findAllComponents(Card)
     expect(actionCards.length).toBe(3)
   })
+
+  it('should redirect after clicking a card', async () => {
+    const wrapper = mount(HomeView, {
+      global: {
+        plugins: [router]
+      }
+    })
+
+    await flushPromises()
+
+    const push = vi.spyOn(router, 'push')
+    const card = wrapper.findComponent(Slider).findComponent(Card)
+
+    await card.trigger('click')
+
+    expect(push).toHaveBeenCalledOnce()
+    expect(push).toHaveBeenCalledWith('/show/2')
+  })
 })
