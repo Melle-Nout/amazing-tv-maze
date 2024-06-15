@@ -1,8 +1,8 @@
+import type { Card } from '@/types/shared-props/Card'
 import { useLocalStorage } from './useLocalStorage'
 
-interface Favorite {
+type Favorite = Card & {
   id: number
-  imageUrl: string
 }
 
 export function useFavorites() {

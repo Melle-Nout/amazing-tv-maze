@@ -27,7 +27,7 @@ const { toggle, isPresent } = useFavorites()
     </component>
     <button
       v-if="id && images.original"
-      @click.stop="toggle({ id, imageUrl: images.original })"
+      @click.stop="toggle({ id, images, rating })"
       class="card-favorite"
     >
       {{ isPresent(id) ? '❤️' : '🩶' }}
