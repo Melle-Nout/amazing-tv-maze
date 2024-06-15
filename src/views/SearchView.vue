@@ -27,7 +27,15 @@ const { sortShowsByRating } = useShowSorter()
 
 watch(() => route.query.q, submit, { immediate: true })
 
-const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => show.show) ?? []))
+const sortedShows = computed(() => {
+  const showsByRating = sortShowsByRating(shows.value?.map((show) => show.show) ?? [])
+  const formattedShows = showsByRating.map(({ id, image, rating }) => ({
+    id,
+    images: image,
+    rating: rating.average
+  }))
+  return formattedShows
+})
 </script>
 
 <template>
@@ -36,7 +44,7 @@ const sortedShows = computed(() => sortShowsByRating(shows.value?.map((show) => 
       <Title title-heading="h1" title="Search results" />
       <Transition name="fade" mode="out-in">
         <Loader v-if="pending" />
-        <CardGrid v-else-if="sortedShows" :shows="sortedShows" />
+        <CardGrid v-else-if="sortedShows.length" :cards="sortedShows" />
         <p v-else>{{ `No results found for ${query.q}` }}</p>
       </Transition>
     </Section>

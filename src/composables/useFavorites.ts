@@ -1,9 +1,5 @@
-import type { Card } from '@/types/shared-props/Card'
+import type { Favorite } from '@/types/Favorite'
 import { useLocalStorage } from './useLocalStorage'
-
-type Favorite = Card & {
-  id: number
-}
 
 const favorites = useLocalStorage<Favorite[]>('favorites', [])
 
@@ -24,5 +20,5 @@ export function useFavorites() {
     isPresent(favorite.id) ? remove(favorite) : add(favorite)
   }
 
-  return { isPresent, toggle }
+  return { favorites, isPresent, toggle }
 }
