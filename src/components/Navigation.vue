@@ -78,6 +78,7 @@ nav {
   fill: red;
   height: 20px;
   width: 20px;
+  transition: scale 0.2s ease-out;
 }
 
 form {
@@ -87,6 +88,12 @@ form {
 
 .logo {
   width: 30px;
+}
+
+@media (hover: hover) {
+  .heart:hover {
+    scale: 1.1;
+  }
 }
 
 @media (min-width: 768px) {

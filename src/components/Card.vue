@@ -81,11 +81,16 @@ const { toggle, isPresent } = useFavorites()
   cursor: pointer;
   border-width: 0;
   border-bottom-left-radius: var(--border-radius);
+  transition: scale 0.2s;
 }
 
 @media (hover: hover) and (min-width: 1024px) {
   a:hover > .card-media :deep(img) {
     scale: 1.05;
+  }
+
+  .card-favorite:hover {
+    scale: 1.1;
   }
 }
 </style>
