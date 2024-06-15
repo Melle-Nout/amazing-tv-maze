@@ -40,7 +40,7 @@ describe('HomeView', () => {
     expect(wrapper.findComponent(Slider).classes()).toBeTruthy()
   })
 
-  it('should render sliders and titles alphabetically', async () => {
+  it('should render sliders and titles alphabetically by genre', async () => {
     const wrapper = mount(HomeView, {
       global: {
         plugins: [router]
@@ -54,10 +54,24 @@ describe('HomeView', () => {
     expect(titles.length).toBe(11)
     expect(sliders.length).toBe(11)
 
-    const actionTitle = titles[0]
+    const mockTitleOrders = [
+      'Action',
+      'Adventure',
+      'Crime',
+      'Drama',
+      'Espionage',
+      'Horror',
+      'Music',
+      'Mystery',
+      'Romance',
+      'Science-Fiction',
+      'Thriller'
+    ]
+
+    titles.forEach((title, index) => expect(title.text()).toBe(mockTitleOrders[index]))
+
     const actionSlider = sliders[0]
     const actionCards = actionSlider.findAllComponents(Card)
-    expect(actionTitle.text()).toBe('Action')
     expect(actionCards.length).toBe(3)
   })
 })
