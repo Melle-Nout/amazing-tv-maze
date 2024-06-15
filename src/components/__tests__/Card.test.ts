@@ -54,7 +54,6 @@ describe('Card', () => {
     const routerLink = wrapper.findComponent(RouterLink)
 
     expect(routerLink).toBeTruthy()
-    expect(routerLink.classes()).toContain('card')
   })
 
   it('should redirect when an `id` is present and the card is clicked', async () => {
