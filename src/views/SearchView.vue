@@ -52,10 +52,6 @@ const sortedShows = computed(() => {
 </template>
 
 <style scoped>
-.page-content {
-  min-height: calc(100dvh - 70px);
-}
-
 .loader {
   margin-top: 60px;
 }
@@ -69,10 +65,6 @@ const sortedShows = computed(() => {
 }
 
 @media (min-width: 1024px) {
-  .page-content {
-    min-height: calc(100dvh - 100px);
-  }
-
   .title {
     margin-top: 70px;
   }

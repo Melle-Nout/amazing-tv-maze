@@ -1,9 +1,12 @@
 import type { Favorite } from '@/types/Favorite'
 import { useLocalStorage } from './useLocalStorage'
+import { computed } from 'vue'
 
 const favorites = useLocalStorage<Favorite[]>('favorites', [])
 
 export function useFavorites() {
+  const hasFavorites = computed(() => !!favorites.value.length)
+
   function add(favorite: Favorite) {
     favorites.value = [favorite, ...favorites.value]
   }
@@ -20,5 +23,5 @@ export function useFavorites() {
     isPresent(favorite.id) ? remove(favorite) : add(favorite)
   }
 
-  return { favorites, isPresent, toggle }
+  return { favorites, hasFavorites, isPresent, toggle }
 }

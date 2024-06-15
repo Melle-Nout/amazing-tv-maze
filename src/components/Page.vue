@@ -19,6 +19,7 @@ defineProps<Props>()
 
 .page-content {
   max-width: 1024px;
+  min-height: calc(100dvh - 70px);
   padding-inline: 0;
   margin-inline: auto;
   overflow: hidden;
@@ -40,6 +41,7 @@ defineProps<Props>()
 
 @media (min-width: 1024px) {
   .page-content {
+    min-height: calc(100dvh - 100px);
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
   }

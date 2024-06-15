@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 
+import { useFavorites } from '@/composables/useFavorites'
+import FavoriteIcon from './FavoriteIcon.vue'
 import Input from './Input.vue'
 
 const router = useRouter()
@@ -13,6 +15,8 @@ function submit() {
     query: { q: query.value }
   })
 }
+
+const { hasFavorites } = useFavorites()
 
 onMounted(async () => {
   await router.isReady()
@@ -30,14 +34,19 @@ onMounted(async () => {
       <RouterLink to="/">
         <img src="../assets/icons/logo.svg" alt="ABN AMRO logo" class="logo" />
       </RouterLink>
-      <form action="/search" method="get" @submit.prevent="submit">
-        <Input
-          v-model="query"
-          id="search"
-          placeholder="Search by show title"
-          label-text="Search shows"
-        />
-      </form>
+      <div class="right">
+        <form action="/search" method="get" @submit.prevent="submit">
+          <Input
+            v-model="query"
+            id="search"
+            placeholder="Search by show title"
+            label-text="Search shows"
+          />
+        </form>
+        <RouterLink to="/favorites">
+          <FavoriteIcon :is-full="hasFavorites" class="heart" />
+        </RouterLink>
+      </div>
     </nav>
   </header>
 </template>
@@ -58,8 +67,22 @@ nav {
   margin: 15px;
 }
 
+.right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.heart {
+  fill: red;
+  height: 20px;
+  width: 20px;
+}
+
 form {
   max-width: 200px;
+  height: 100%;
 }
 
 .logo {
@@ -69,6 +92,15 @@ form {
 @media (min-width: 768px) {
   nav {
     margin: 30px;
+  }
+
+  .right {
+    gap: 20px;
+  }
+
+  .heart {
+    width: 25px;
+    height: 25px;
   }
 }
 

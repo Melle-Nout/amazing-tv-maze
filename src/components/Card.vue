@@ -5,6 +5,7 @@ import { RouterLink } from 'vue-router'
 import type { Card } from '@/types/shared-props/Card'
 import { useFavorites } from '@/composables/useFavorites'
 import Image from './Image.vue'
+import FavoriteIcon from './FavoriteIcon.vue'
 
 const props = defineProps<Card>()
 
@@ -26,11 +27,13 @@ const { toggle, isPresent } = useFavorites()
       <span v-if="rating" class="card-rating">{{ rating }} ⭐</span>
     </component>
     <button
-      v-if="id && images.original"
-      @click.stop="toggle({ id, images, rating })"
+      v-if="id && (images.original || images.medium)"
+      @click="toggle({ id, images, rating })"
+      type="button"
+      aria-label="Favorite"
       class="card-favorite"
     >
-      {{ isPresent(id) ? '❤️' : '🩶' }}
+      <FavoriteIcon :is-full="isPresent(id)" />
     </button>
   </div>
 </template>
@@ -71,6 +74,7 @@ const { toggle, isPresent } = useFavorites()
 }
 
 .card-favorite {
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
