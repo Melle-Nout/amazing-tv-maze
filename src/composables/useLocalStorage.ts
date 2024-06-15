@@ -5,7 +5,7 @@ export function useLocalStorage<T>(key: string, defaultValue: T) {
     get() {
       track()
       const value = localStorage.getItem(key)
-      return value ? (JSON.parse(value) as T) : defaultValue
+      return value ? JSON.parse(value) : defaultValue
     },
     set(value) {
       if (!value) {
