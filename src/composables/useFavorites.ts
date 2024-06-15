@@ -5,9 +5,9 @@ type Favorite = Card & {
   id: number
 }
 
-export function useFavorites() {
-  const favorites = useLocalStorage<Favorite[]>('favorites', [])
+const favorites = useLocalStorage<Favorite[]>('favorites', [])
 
+export function useFavorites() {
   function add(favorite: Favorite) {
     favorites.value = [favorite, ...favorites.value]
   }
