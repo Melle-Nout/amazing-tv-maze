@@ -14,7 +14,6 @@ export function useFavorites() {
 
   function remove(favorite: Favorite) {
     favorites.value = favorites.value.filter((item) => item.id !== favorite.id)
-    console.log(favorites.value)
   }
 
   function isPresent(id: number) {
