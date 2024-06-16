@@ -30,4 +30,10 @@ defineProps<Props>()
   height: 300px;
   aspect-ratio: 2 / 3;
 }
+
+@media (min-width: 1024px) {
+  .card-grid {
+    justify-content: start;
+  }
+}
 </style>
